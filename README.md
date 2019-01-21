@@ -8,6 +8,8 @@ $ npm install fiorsaoirse-gendiff
 
 <a href="https://codeclimate.com/github/fiorsaoirse/project-lvl2-s401/test_coverage"><img src="https://api.codeclimate.com/v1/badges/8c745c756ba3e996c326/test_coverage" /></a>
 
+[![Build Status](https://travis-ci.com/fiorsaoirse/gendiff.svg?branch=master)](https://travis-ci.com/fiorsaoirse/gendiff)
+
 Get help:
 
 <a href="https://asciinema.org/a/RQHyk09PReM4vV43v6ZFNAZEt" target="_blank"><img src="https://asciinema.org/a/RQHyk09PReM4vV43v6ZFNAZEt.svg" /></a>

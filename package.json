@@ -1,6 +1,6 @@
 {
   "name": "fiorsaoirse-gendiff",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "This is the second hexlet project - comparing two files to get difference",
   "main": "index.js",
   "bin": {
@@ -57,6 +57,7 @@
     "commander": "^2.19.0",
     "gulp": "^4.0.0",
     "lodash": "^4.17.11",
-    "source-map-support": "^0.5.10"
+    "source-map-support": "^0.5.10",
+    "js-yaml": "^3.12.1"
   }
 }

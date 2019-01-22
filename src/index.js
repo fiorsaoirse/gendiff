@@ -14,26 +14,23 @@ const genDiff = (pathToFirstFile, pathToSecondFile) => {
   const secondKeys = Object.keys(secondFormatted);
   const unatedKeys = union(firstKeys, secondKeys);
 
-  const result = {};
-
-  unatedKeys.map((key) => {
+  const result = unatedKeys.reduce((acc, key) => {
     if (has(firstFormatted, key) && has(secondFormatted, key)) {
       if (firstFormatted[key] === secondFormatted[key]) {
-        result[key] = firstFormatted[key];
-      } else {
-        result[`- ${key}`] = firstFormatted[key];
-        result[`+ ${key}`] = secondFormatted[key];
+        return ({ ...acc, [key]: firstFormatted[key] });
       }
-    } else {
-      if (has(firstFormatted, key) && !has(secondFormatted, key)) {
-        result[`- ${key}`] = firstFormatted[key];
-      }
-      if (!has(firstFormatted, key) && has(secondFormatted, key)) {
-        result[`+ ${key}`] = secondFormatted[key];
-      }
+      return ({ ...acc, [`+ ${key}`]: secondFormatted[key], [`- ${key}`]: firstFormatted[key] });
     }
-  });
-  return JSON.stringify(result);
+    if (!has(firstFormatted, key) && has(secondFormatted, key)) {
+      return ({ ...acc, [`+ ${key}`]: secondFormatted[key] });
+    }
+    if (has(firstFormatted, key) && !has(secondFormatted, key)) {
+      return ({ ...acc, [`- ${key}`]: firstFormatted[key] });
+    }
+    return ({ ...acc });
+  }, {});
+
+  return JSON.stringify(result, null, '\t');
 };
 
 export default genDiff;

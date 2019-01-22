@@ -13,3 +13,7 @@ $ npm install fiorsaoirse-gendiff
 Get help:
 
 <a href="https://asciinema.org/a/RQHyk09PReM4vV43v6ZFNAZEt" target="_blank"><img src="https://asciinema.org/a/RQHyk09PReM4vV43v6ZFNAZEt.svg" /></a>
+
+Compare two .json files:
+
+<a href="https://asciinema.org/a/PsdSTLzVAgYYOMm1dDxloLPqh" target="_blank"><img src="https://asciinema.org/a/PsdSTLzVAgYYOMm1dDxloLPqh.svg" /></a>

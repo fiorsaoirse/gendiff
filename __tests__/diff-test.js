@@ -1,5 +1,5 @@
 import fs from 'fs';
-import genDiff from '../src/genDiff';
+import genDiff from '../src';
 
 const pathToBeforeJSON = '__tests__/__fixtures__/before.json';
 const pathToAfterJSON = '__tests__/__fixtures__/after.json';

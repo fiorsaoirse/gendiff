@@ -25,3 +25,4 @@ extends:
 
 rules:
   no-console: 0
+  lodash-fp/use-fp: 0

@@ -1,5 +1,7 @@
 import fs from 'fs';
 import { has, union } from 'lodash';
+import { extname } from 'path';
+import parse from './parsers';
 
 const getFileData = path => fs.readFileSync(path, 'utf-8');
 
@@ -7,8 +9,11 @@ const genDiff = (pathToFirstFile, pathToSecondFile) => {
   const firstFile = getFileData(pathToFirstFile);
   const secondFile = getFileData(pathToSecondFile);
 
-  const firstFormatted = JSON.parse(firstFile);
-  const secondFormatted = JSON.parse(secondFile);
+  const typeOfFirstFile = extname(pathToFirstFile);
+  const typeOfSecondFile = extname(pathToSecondFile);
+
+  const firstFormatted = parse(typeOfFirstFile)(firstFile);
+  const secondFormatted = parse(typeOfSecondFile)(secondFile);
 
   const firstKeys = Object.keys(firstFormatted);
   const secondKeys = Object.keys(secondFormatted);
@@ -43,9 +48,9 @@ const genDiff = (pathToFirstFile, pathToSecondFile) => {
     return `  - ${key}: ${firstFormatted[key]}`;
   });
 
-  console.log(result2);
+  // console.log(result2);
 
-  console.log(`{\n${result2.join('\n')}\n}\n`);
+  // console.log(`{\n${result2.join('\n')}\n}\n`);
 
   return `{\n${result2.join('\n')}\n}\n`;
 };

@@ -8,6 +8,9 @@ const pathToCompareBeforeAfterResult = '__tests__/__fixtures__/before-after-resu
 const pathToBeforeYML = '__tests__/__fixtures__/before.yml';
 const pathToAfterYML = '__tests__/__fixtures__/after.yml';
 
+const pathToBeforeINI = '__tests__/__fixtures__/before.ini';
+const pathToAfterINI = '__tests__/__fixtures__/after.ini';
+
 const getFileContent = path => fs.readFileSync(path, 'utf-8');
 
 test('Compare before.json and after.json should be equal to before-after-result.txt', () => {
@@ -15,8 +18,12 @@ test('Compare before.json and after.json should be equal to before-after-result.
     .toBe(getFileContent(pathToCompareBeforeAfterResult));
 });
 
-
 test('Compare before.yml and after.yml should be equal to before-after-result.txt', () => {
   expect(genDiff(pathToBeforeYML, pathToAfterYML))
+    .toBe(getFileContent(pathToCompareBeforeAfterResult));
+});
+
+test('Compare before.ini and after.ini should be equal to before-after-result.txt', () => {
+  expect(genDiff(pathToBeforeINI, pathToAfterINI))
     .toBe(getFileContent(pathToCompareBeforeAfterResult));
 });

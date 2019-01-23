@@ -21,3 +21,7 @@ Compare two .json files:
 Compare two .yml files:
 
 <a href="https://asciinema.org/a/Tqfivcw6AJLRAVvIeVP1mljsR" target="_blank"><img src="https://asciinema.org/a/Tqfivcw6AJLRAVvIeVP1mljsR.svg" /></a>
+
+Compare two .ini files:
+
+<a href="https://asciinema.org/a/1DVOTY0QGpDjuhjutMQTMn4MU" target="_blank"><img src="https://asciinema.org/a/1DVOTY0QGpDjuhjutMQTMn4MU.svg" /></a>

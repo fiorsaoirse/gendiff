@@ -14,7 +14,7 @@ const genDiff = (pathToFirstFile, pathToSecondFile) => {
   const secondKeys = Object.keys(secondFormatted);
   const unatedKeys = union(firstKeys, secondKeys);
 
-  const result = unatedKeys.reduce((acc, key) => {
+  /* const result = unatedKeys.reduce((acc, key) => {
     if (has(firstFormatted, key) && has(secondFormatted, key)) {
       if (firstFormatted[key] === secondFormatted[key]) {
         return ({ ...acc, [key]: firstFormatted[key] });
@@ -28,9 +28,26 @@ const genDiff = (pathToFirstFile, pathToSecondFile) => {
       return ({ ...acc, [`- ${key}`]: firstFormatted[key] });
     }
     return ({ ...acc });
-  }, {});
+  }, {}); */
 
-  return JSON.stringify(result, null, '\t');
+  const result2 = unatedKeys.map((key) => {
+    if (has(firstFormatted, key) && has(secondFormatted, key)) {
+      if (firstFormatted[key] === secondFormatted[key]) {
+        return `    ${key}: ${firstFormatted[key]}`;
+      }
+      return [`  + ${key}: ${secondFormatted[key]}`, `  - ${key}: ${firstFormatted[key]}`].join('\n');
+    }
+    if (!has(firstFormatted, key) && has(secondFormatted, key)) {
+      return `  + ${key}: ${secondFormatted[key]}`;
+    }
+    return `  - ${key}: ${firstFormatted[key]}`;
+  });
+
+  console.log(result2);
+
+  console.log(`{\n${result2.join('\n')}\n}\n`);
+
+  return `{\n${result2.join('\n')}\n}\n`;
 };
 
 export default genDiff;

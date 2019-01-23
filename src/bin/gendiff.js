@@ -8,5 +8,5 @@ commander
   .version('0.0.1')
   .option('-f, --format [type]', 'Output format')
   .arguments('<firstConfig> <secondConfig>')
-  .action((firstConfig, secondConfig) => console.log(`\n ${genDiff(firstConfig, secondConfig)}`))
+  .action((firstConfig, secondConfig) => console.log(`${genDiff(firstConfig, secondConfig)}`))
   .parse(process.argv);

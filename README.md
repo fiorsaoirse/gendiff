@@ -17,3 +17,7 @@ Get help:
 Compare two .json files:
 
 <a href="https://asciinema.org/a/PsdSTLzVAgYYOMm1dDxloLPqh" target="_blank"><img src="https://asciinema.org/a/PsdSTLzVAgYYOMm1dDxloLPqh.svg" /></a>
+
+Compare two .yml files:
+
+<a href="https://asciinema.org/a/Tqfivcw6AJLRAVvIeVP1mljsR" target="_blank"><img src="https://asciinema.org/a/Tqfivcw6AJLRAVvIeVP1mljsR.svg" /></a>

@@ -1,6 +1,6 @@
 {
   "name": "fiorsaoirse-gendiff",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "This is the second hexlet project - comparing two files to get difference",
   "main": "dist/index.js",
   "bin": {

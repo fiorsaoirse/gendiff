@@ -1,85 +1,71 @@
 import { flatten } from 'lodash';
 
-const states = {
-  nested: '  ',
-  added: '+ ',
-  deleted: '- ',
-  equal: '  ',
-  changed: '+ ,- ',
-};
-
-const setSpaces = (depth) => {
-  switch (depth) {
-    case 1:
-      return '  ';
-    case 2:
-      return '      ';
-    case 3:
-      return '          ';
-    default:
-      return '';
-  }
-};
-
-const getStateSymbol = symbol => states[symbol];
-
-const stringify = (value, depth) => {
+const stringify = (value, depth, spaces) => {
   if (value instanceof Object) {
     const valueKeys = Object.keys(value);
-    const spaces = setSpaces(depth);
-    const spacesOnNextDepth = setSpaces(depth + 1);
-    const mapped = `{\n${valueKeys.map(key => `${spacesOnNextDepth}  ${key}: ${value[key]}`)}\n${spaces}  }`;
-    return mapped;
+    //console.log('value ', JSON.stringify(value));    
+    const mapped = valueKeys.map(key => `  ${key}: ${value[key]}`).join('');
+    //console.log('mapped ', mapped);
+    //console.log('spaces [', spaces, ']');
+    //console.log(`{\n${spaces.repeat(depth)}${mapped}\n${spaces.repeat(depth)}}`);
+    return `{\n${spaces.repeat(depth + 1)}${mapped}\n${spaces.repeat(depth + 1)}}`;
   }
   return value;
 };
 
-const typesOfValue = [
+const typesOfNode = [
   {
-    check: record => record.children.length,
-    process: (record, currentDepth, fn) => {
-      const spacesCount = setSpaces(currentDepth);
-      const symbol = getStateSymbol(record.state);
+    check: typeOfNode => typeOfNode === 'nested',
+    makeString: (record, currentDepth, fn, spaces) => {
       const { key } = record;
-      const value = flatten(record.children
-        .map(childRecord => fn(childRecord, currentDepth + 1)))
-        .join('\n');
-
-      return `${spacesCount}${symbol}${key}: {\n${value}\n${spacesCount}${symbol}}`;
-    },
+      const value = flatten(record.children.map(currentChild => fn(currentChild, currentDepth + 1)))
+                    .join('\n');
+      return `${spaces.repeat(currentDepth)}  ${key}: {\n${value}\n${spaces.repeat(currentDepth)}}`
+    }
   },
   {
-    check: record => record.value !== undefined,
-    process: (record, currentDepth) => {
-      const spacesCount = setSpaces(currentDepth);
-      const symbol = getStateSymbol(record.state);
+    check: typeOfNode => typeOfNode === 'added',
+    makeString: (record, currentDepth, fn, spaces) => {
       const { key } = record;
-      const value = stringify(record.value, currentDepth);
-
-      return `${spacesCount}${symbol}${key}: ${value}`;
-    },
+      const value = stringify(record.value, currentDepth, spaces);
+      return `${spaces.repeat(currentDepth)}+ ${key}: ${value}`;
+    }
   },
   {
-    check: record => record.valueOld !== undefined && record.valueNew !== undefined,
-    process: (record, currentDepth) => {
-      const spacesCount = setSpaces(currentDepth);
-      const symbol = getStateSymbol(record.state).split(',');
-      const [symbolNew, symbolOld] = symbol;
+    check: typeOfNode => typeOfNode === 'deleted',
+    makeString: (record, currentDepth, fn, spaces) => {
       const { key } = record;
-      const valueOld = stringify(record.valueOld, currentDepth);
-      const valueNew = stringify(record.valueNew, currentDepth);
-
-      return `${spacesCount}${symbolOld}${key}: ${valueOld}\n${spacesCount}${symbolNew}${key}: ${valueNew}`;
-    },
+      const value = stringify(record.value, currentDepth, spaces);
+      return `${spaces.repeat(currentDepth)}- ${key}: ${value}`;
+    }
   },
+  {
+    check: typeOfNode => typeOfNode === 'equal',
+    makeString: (record, currentDepth, fn, spaces) => {
+      const { key } = record;
+      const value = stringify(record.value, currentDepth, spaces);
+      return `${spaces.repeat(currentDepth)}  ${key}: ${value}`;
+    }
+  },
+  {
+    check: typeOfNode => typeOfNode === 'changed',
+    makeString: (record, currentDepth, fn, spaces) => {
+      const { key } = record;
+      const valueOld = stringify(record.valueOld, currentDepth, spaces);
+      const valueNew = stringify(record.valueNew, currentDepth, spaces);
+      return `${spaces.repeat(currentDepth)}- ${key}: ${valueOld}\n${spaces.repeat(currentDepth)}+ ${key}: ${valueNew}`;
+    }
+  }
 ];
 
-const getTypeOfValue = arg => typesOfValue.find(({ check }) => check(arg));
+const checkNode = arg => typesOfNode.find(({ check }) => check(arg));
 
 const render = (data) => {
+  const firstLevelSpaces = '  ';
+  //console.log(JSON.stringify(data));
   const iter = (record, currentDepth) => {
-    const { process } = getTypeOfValue(record);
-    return process(record, currentDepth, iter);
+    const { makeString } = checkNode(record.state);
+    return makeString(record, currentDepth, iter, firstLevelSpaces);
   };
 
   const result = data.map(currentRecord => iter(currentRecord, 1)).join('\n');

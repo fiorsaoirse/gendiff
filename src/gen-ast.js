@@ -8,7 +8,6 @@ const typesOfActions = [
     check: (key, obj1, obj2) => hasKey(key, obj1, obj2) && isObjects(obj1[key], obj2[key]),
     process: (key, obj1, obj2, fn) => ({
       key,
-      value: '',
       children: fn(obj1[key], obj2[key]),
       state: 'nested',
     }),
@@ -18,7 +17,6 @@ const typesOfActions = [
     process: (key, obj1) => ({
       key,
       value: obj1[key],
-      children: [],
       state: 'equal',
     }),
   },
@@ -28,7 +26,6 @@ const typesOfActions = [
       key,
       valueOld: obj1[key],
       valueNew: obj2[key],
-      children: [],
       state: 'changed',
     }),
   },
@@ -37,7 +34,6 @@ const typesOfActions = [
     process: (key, obj1) => ({
       key,
       value: obj1[key],
-      children: [],
       state: 'deleted',
     }),
   },
@@ -46,7 +42,6 @@ const typesOfActions = [
     process: (key, obj1, obj2) => ({
       key,
       value: obj2[key],
-      children: [],
       state: 'added',
     }),
   },

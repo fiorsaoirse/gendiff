@@ -14,14 +14,12 @@ const genDiff = (pathToFirstFile, pathToSecondFile) => {
   const typeOfSecondFile = extname(pathToSecondFile);
 
   const firstFormatted = parse(typeOfFirstFile)(firstFile);
-  console.log('ff ', firstFormatted);
   const secondFormatted = parse(typeOfSecondFile)(secondFile);
-  console.log('sf ', secondFormatted);
 
-  const resultAst = ast(firstFormatted, secondFormatted);
-  // const renderedAst = render(resultAst);
+  const getAST = ast(firstFormatted, secondFormatted);
+  const getRenderedAST = render(getAST);
 
-  return 'foobaz';
+  return getRenderedAST;
 };
 
 export default genDiff;

@@ -25,3 +25,6 @@ Compare two .yml files:
 Compare two .ini files:
 
 <a href="https://asciinema.org/a/1DVOTY0QGpDjuhjutMQTMn4MU" target="_blank"><img src="https://asciinema.org/a/1DVOTY0QGpDjuhjutMQTMn4MU.svg" /></a>
+
+Compare nested files:
+<a href="https://asciinema.org/a/koBLqgf6zY6BKgAmVn1cVw1qh" target="_blank"><img src="https://asciinema.org/a/koBLqgf6zY6BKgAmVn1cVw1qh.svg" /></a>

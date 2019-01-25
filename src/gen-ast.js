@@ -6,10 +6,10 @@ const isObjects = (value1, value2) => (value1 instanceof Object) && (value2 inst
 const typesOfActions = [
   {
     check: (key, obj1, obj2) => hasKey(key, obj1, obj2) && isObjects(obj1[key], obj2[key]),
-    process: (key, obj1, obj2) => ({
+    process: (key, obj1, obj2, fn) => ({
       key,
       value: '',
-      children: ast(obj1[key], obj2[key]),
+      children: fn(obj1[key], obj2[key]),
       state: 'nested',
     }),
   },
@@ -61,7 +61,7 @@ const ast = (obj1, obj2) => {
 
   const AST = unatedKeys.map((key) => {
     const { process } = checkAction(key, obj1, obj2);
-    return process(key, obj1, obj2);
+    return process(key, obj1, obj2, ast);
   });
 
   // console.log('AST \n', JSON.stringify(AST));

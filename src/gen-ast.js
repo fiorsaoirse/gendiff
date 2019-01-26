@@ -9,7 +9,7 @@ const typesOfActions = [
     process: (key, obj1, obj2, fn) => ({
       key,
       value: fn(obj1[key], obj2[key]),
-      state: 'nested',
+      type: 'nested',
     }),
   },
   {
@@ -17,7 +17,7 @@ const typesOfActions = [
     process: (key, obj1) => ({
       key,
       value: obj1[key],
-      state: 'equal',
+      type: 'equal',
     }),
   },
   {
@@ -26,7 +26,7 @@ const typesOfActions = [
       key,
       valueOld: obj1[key],
       valueNew: obj2[key],
-      state: 'changed',
+      type: 'changed',
     }),
   },
   {
@@ -34,7 +34,7 @@ const typesOfActions = [
     process: (key, obj1) => ({
       key,
       value: obj1[key],
-      state: 'deleted',
+      type: 'deleted',
     }),
   },
   {
@@ -42,7 +42,7 @@ const typesOfActions = [
     process: (key, obj1, obj2) => ({
       key,
       value: obj2[key],
-      state: 'added',
+      type: 'added',
     }),
   },
 ];

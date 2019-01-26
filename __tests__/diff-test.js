@@ -4,7 +4,7 @@ import genDiff from '../src';
 
 const commonPath = '__tests__/__fixtures__';
 
-const getFileContent = pathToFile => fs.readFileSync(pathToFile, 'utf-8');
+const getFileContent = pathToFile => fs.readFileSync(pathToFile, 'utf-8').trim();
 
 const generateTest = (type, firstFileName, secondFileName, expectedData) => {
   test(`Compare ${type} result ${firstFileName} and ${secondFileName} should be equal ${expectedData}`, () => {
@@ -20,7 +20,4 @@ const generateTest = (type, firstFileName, secondFileName, expectedData) => {
     generateTest(type, `before${extension}`, `after${extension}`, `${type}-before-after-result.txt`);
     generateTest(type, `before-nested${extension}`, `after-nested${extension}`, `${type}-before-after-nested-result.txt`);
   });
-}); 
-
-// generateTest('json', `before.json`, `after.yml`, `json-before-after-result.txt`);
-// generateTest('json', `before-nested.json`, `after-nested.yml`, `json-before-after-nested-result.txt`);
+});

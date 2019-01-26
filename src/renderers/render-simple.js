@@ -15,7 +15,7 @@ const typesOfNode = {
 
   nested: (record, currentDepth, fn, spaces, step) => {
     const { key } = record;
-    const value = flatten(record.children.map(currentChild => fn(currentChild, currentDepth + 1)))
+    const value = flatten(record.value.map(currentChild => fn(currentChild, currentDepth + 1)))
       .join('\n');
     const indent = currentDepth * step - 2;
     return `${spaces.repeat(indent)}  ${key}: {\n${value}\n  ${spaces.repeat(indent)}}`;

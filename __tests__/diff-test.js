@@ -16,8 +16,11 @@ const generateTest = (type, firstFileName, secondFileName, expectedData) => {
 };
 
 ['.json', '.yml', '.ini'].forEach((extension) => {
-  generateTest('simple', `before${extension}`, `after${extension}`, 'before-after-result.txt');
-  generateTest('simple', `before-nested${extension}`, `after-nested${extension}`, 'before-after-nested-result.txt');
-  generateTest('plain', `before${extension}`, `after${extension}`, 'plain-before-after-result.txt');
-  generateTest('plain', `before-nested${extension}`, `after-nested${extension}`, 'plain-before-after-nested-result.txt');
-});
+  ['simple', 'plain'].forEach((type) => {
+    generateTest(type, `before${extension}`, `after${extension}`, `${type}-before-after-result.txt`);
+    generateTest(type, `before-nested${extension}`, `after-nested${extension}`, `${type}-before-after-nested-result.txt`);
+  });
+}); 
+
+// generateTest('json', `before.json`, `after.yml`, `json-before-after-result.txt`);
+// generateTest('json', `before-nested.json`, `after-nested.yml`, `json-before-after-nested-result.txt`);

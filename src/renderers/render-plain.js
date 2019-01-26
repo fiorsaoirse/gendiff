@@ -14,7 +14,7 @@ const typesOfNode = {
 
   nested: (record, previousKey, fn) => {
     const key = (previousKey ? `${previousKey}.${record.key}` : record.key);
-    const children = flatten(record.children.map(currentRecord => fn(currentRecord, key)));
+    const children = flatten(record.value.map(currentRecord => fn(currentRecord, key)));
     return children;
   },
   added: (record, previousKey) => {

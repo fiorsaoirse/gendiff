@@ -8,7 +8,7 @@ const typesOfActions = [
     check: (key, obj1, obj2) => hasKey(key, obj1, obj2) && isObjects(obj1[key], obj2[key]),
     process: (key, obj1, obj2, fn) => ({
       key,
-      children: fn(obj1[key], obj2[key]),
+      value: fn(obj1[key], obj2[key]),
       state: 'nested',
     }),
   },

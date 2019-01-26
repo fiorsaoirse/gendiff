@@ -28,3 +28,6 @@ Compare two .ini files:
 
 Compare nested files:
 <a href="https://asciinema.org/a/koBLqgf6zY6BKgAmVn1cVw1qh" target="_blank"><img src="https://asciinema.org/a/koBLqgf6zY6BKgAmVn1cVw1qh.svg" /></a>
+
+Result as plain list:
+<a href="https://asciinema.org/a/C1Cjj1HA5FNb2EtdXfyTIq8AC" target="_blank"><img src="https://asciinema.org/a/C1Cjj1HA5FNb2EtdXfyTIq8AC.svg" /></a>

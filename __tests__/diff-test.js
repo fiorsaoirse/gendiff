@@ -6,14 +6,18 @@ const commonPath = '__tests__/__fixtures__';
 
 const getFileContent = pathToFile => fs.readFileSync(pathToFile, 'utf-8');
 
-const generateTest = (firstFileName, secondFileName, expectedData) => {
-  test(`Compare result ${firstFileName} and ${secondFileName} should be equal ${expectedData}`, () => {
-    expect(genDiff(path.join(commonPath, firstFileName), path.join(commonPath, secondFileName)))
+const generateTest = (type, firstFileName, secondFileName, expectedData) => {
+  test(`Compare ${type} result ${firstFileName} and ${secondFileName} should be equal ${expectedData}`, () => {
+    const firstFilePath = path.join(commonPath, firstFileName);
+    const secondFilePath = path.join(commonPath, secondFileName);
+    expect(genDiff(firstFilePath, secondFilePath, type))
       .toBe(getFileContent(path.join(commonPath, expectedData)));
   });
 };
 
 ['.json', '.yml', '.ini'].forEach((extension) => {
-  generateTest(`before${extension}`, `after${extension}`, 'before-after-result.txt');
-  generateTest(`before-nested${extension}`, `after-nested${extension}`, 'before-after-nested-result.txt');
+  generateTest('simple', `before${extension}`, `after${extension}`, 'before-after-result.txt');
+  generateTest('simple', `before-nested${extension}`, `after-nested${extension}`, 'before-after-nested-result.txt');
+  generateTest('plain', `before${extension}`, `after${extension}`, 'plain-before-after-result.txt');
+  generateTest('plain', `before-nested${extension}`, `after-nested${extension}`, 'plain-before-after-nested-result.txt');
 });

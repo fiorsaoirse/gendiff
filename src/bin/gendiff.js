@@ -8,7 +8,8 @@ commander
   .version('0.0.1')
   .option('-f, --format [type]', `Output formats:
                                   "simple" - shows diffs as a tree
-                                  "plain" - shows diffs as a list`, 'simple')
+                                  "plain" - shows diffs as a list
+                                  "json" - shows diffs as a json`, 'simple')
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig) => console.log(`${genDiff(firstConfig, secondConfig, commander.format)}`))
   .parse(process.argv);

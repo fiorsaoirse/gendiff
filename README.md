@@ -31,3 +31,6 @@ Compare nested files:
 
 Result as plain list:
 <a href="https://asciinema.org/a/C1Cjj1HA5FNb2EtdXfyTIq8AC" target="_blank"><img src="https://asciinema.org/a/C1Cjj1HA5FNb2EtdXfyTIq8AC.svg" /></a>
+
+Gendiff demo:
+<a href="https://asciinema.org/a/vNzXCXZDSFCkXsB5qjniyy5Ux" target="_blank"><img src="https://asciinema.org/a/vNzXCXZDSFCkXsB5qjniyy5Ux.svg" /></a>
